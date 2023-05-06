@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface MailgunClient {
 
 
-    @PostMapping("https://api.mailgun.net/v3/sandboxae5945e4709143afa7f4b26e98897582.mailgun.org/messages")
+    @PostMapping("sandboxae5945e4709143afa7f4b26e98897582.mailgun.org/messages")
     ResponseEntity<String> sendMail(@SpringQueryMap SendMailForm form); // 메일 보내기
 }
