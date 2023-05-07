@@ -12,10 +12,13 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+
 server:
   servlet:
     encoding:
-      charset=UTF-8:
+      charset: UTF-8
+      force: true
+      enabled: true
   port: 8081
 
 feign:

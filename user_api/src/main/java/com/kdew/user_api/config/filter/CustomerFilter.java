@@ -2,7 +2,7 @@ package com.kdew.user_api.config.filter;
 
 import com.kdew.dewdomain.common.UserVo;
 import com.kdew.dewdomain.config.JwtAuthenticationProvider;
-import com.kdew.user_api.service.CustomerService;
+import com.kdew.user_api.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 
 import javax.servlet.*;
