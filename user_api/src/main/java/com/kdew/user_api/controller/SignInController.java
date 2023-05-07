@@ -1,10 +1,8 @@
 package com.kdew.user_api.controller;
 
-import com.kdew.dewdomain.config.JwtAuthenticationProvider;
 import com.kdew.user_api.client.domain.SignInForm;
-import com.kdew.user_api.service.SignInService;
+import com.kdew.user_api.service.customer.SignInService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

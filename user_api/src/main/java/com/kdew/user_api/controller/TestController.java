@@ -1,6 +1,5 @@
 package com.kdew.user_api.controller;
 
-import com.kdew.user_api.service.SignUpCustomerService;
 import com.kdew.user_api.service.test.EmailSendService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

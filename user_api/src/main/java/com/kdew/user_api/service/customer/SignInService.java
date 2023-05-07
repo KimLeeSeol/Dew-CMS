@@ -1,4 +1,4 @@
-package com.kdew.user_api.service;
+package com.kdew.user_api.service.customer;
 
 import com.kdew.dewdomain.common.UserType;
 import com.kdew.dewdomain.config.JwtAuthenticationProvider;
@@ -6,6 +6,7 @@ import com.kdew.user_api.client.domain.SignInForm;
 import com.kdew.user_api.exception.CustomException;
 import com.kdew.user_api.exception.ErrorCode;
 import com.kdew.user_api.model.Customer;
+import com.kdew.user_api.service.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

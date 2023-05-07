@@ -1,4 +1,4 @@
-package com.kdew.user_api.service;
+package com.kdew.user_api.service.customer;
 
 import com.kdew.user_api.client.repository.CustomerRepository;
 import com.kdew.user_api.model.Customer;
