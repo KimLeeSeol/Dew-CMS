@@ -39,7 +39,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("커머스 프로젝트")
-                .description("날씨 일기를 CRUD를 할 수 있는 백엔드 API")
+                .description("docker를 활용한 간단한 커머스 프로젝트 !!")
                 .version("2.0")
                 .build();
     }

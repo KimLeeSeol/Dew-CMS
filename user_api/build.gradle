@@ -27,7 +27,7 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
-
+    implementation project(path: ':dew-domain', configuration: 'default')
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'mysql:mysql-connector-java:8.0.32'
