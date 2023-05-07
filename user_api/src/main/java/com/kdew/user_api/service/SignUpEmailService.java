@@ -29,9 +29,9 @@ public class SignUpEmailService {
 
             String code = getRandomCode();
             SendMailForm sendMailForm = SendMailForm.builder()
-                            .from("tester@gemail.com")
+                            .from("admin@gemail.com")
                             .to(form.getEmail())
-                            .subject("Verification Email")
+                            .subject("이메일 인증해주세요!")
                             .text(getVerificationEmailBody(c.getEmail(), c.getName(), code))
                             .build();
             mailgunClient.sendMail(sendMailForm);
@@ -49,7 +49,7 @@ public class SignUpEmailService {
     // 템플릿 만들기
     private String getVerificationEmailBody(String email, String name, String code) {
         StringBuilder builder = new StringBuilder();
-        return builder.append("Hello ").append(name).append("! please Click Link for verification.\n\n")
+        return builder.append("Hello ").append(name).append("please Click Link for verification!!!\n\n")
                 .append("http://localhost:8082/customer/verify/customer?email=")
                 .append(email)
                 .append("&code=")
