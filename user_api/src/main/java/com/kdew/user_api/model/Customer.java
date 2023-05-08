@@ -35,6 +35,9 @@ public class Customer extends BaseEntity{
     private String verificationCode; // 코드 기반으로 인증 하니까
     private boolean verify;
 
+    @Column(columnDefinition = "int default 0")
+    private Integer balance; // 예치금
+
     public static Customer from(SignUpform form) {
 
         return Customer.builder()
