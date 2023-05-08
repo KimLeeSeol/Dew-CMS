@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/signup", produces="text/plain;charset=UTF-8")
+@RequestMapping(value = "/signUp", produces="text/plain;charset=UTF-8")
 @RequiredArgsConstructor
 public class SignUpController {
 
