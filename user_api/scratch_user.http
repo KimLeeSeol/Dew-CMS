@@ -1,0 +1,67 @@
+### 회원가입 ( 고객 )
+POST http://localhost:8081/signUp/customer
+Content-Type: application/json
+
+{
+  "birth": "1999-05-08",
+  "email": "kdew0308@gmail.com",
+  "name": "구매자",
+  "password": "1234",
+  "phone": "01012345678"
+}
+
+
+### 이메일 인증 ( 고객 )
+GET http://localhost:8081/signUp/customer/verify?email=kdew0308@gmail.com&code=gUlyzQIVON
+
+### 로그인 ( 고객 )
+POST http://localhost:8081/signIn/customer
+content-Type: application/json
+
+{
+  "email": "kdew0308@gmail.com",
+  "password": "1234"
+}
+
+### 회원 정보 조회 ( 고객 )
+GET http://localhost:8081/customer/getInfo
+content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6IktYcmNHa0MyL3dvMU5UYmJwQ1pqZWc9PSIsInJvbGVzIjoiQ1VTVE9NRVIiLCJpYXQiOjE2ODM1MTUxMTIsImV4cCI6MTY4MzYwMTUxMn0.uYUhhFPB_ehQ8vZO-14F6AF-VsHt6UedFqOHBhl2eLY
+
+{
+  "email": "kdew0308@gmail.com",
+  "password": "1234"
+}
+
+### 잔액 변경 ( 고객 )
+POST http://localhost:8081/customer/balance
+content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6IktYcmNHa0MyL3dvMU5UYmJwQ1pqZWc9PSIsInJvbGVzIjoiQ1VTVE9NRVIiLCJpYXQiOjE2ODM1MTUxMTIsImV4cCI6MTY4MzYwMTUxMn0.uYUhhFPB_ehQ8vZO-14F6AF-VsHt6UedFqOHBhl2eLY
+
+{
+  "from": "기업",
+  "message": "입금되었습니다.",
+  "money": 100000
+}
+
+
+### 회원가입 ( 셀러 )
+POST http://localhost:8081/signUp/seller
+Content-Type: application/json
+
+{
+  "birth": "1999-05-09",
+  "email": "kdew@gmail.com",
+  "name": "판매자",
+  "password": "1234",
+  "phone": "01012345678"
+}
+
+### 로그인 ( 셀러 )
+POST http://localhost:8081/signIn/seller
+Content-Type: application/json
+
+{
+  "email" : "kdew@gmail.com",
+  "password" : "1234"
+}
