@@ -1,3 +1,4 @@
 rootProject.name = 'dew_cms'
 include 'user_api'
 include 'dew-domain'
+include 'order-api'
