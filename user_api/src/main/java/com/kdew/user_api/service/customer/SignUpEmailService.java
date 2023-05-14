@@ -58,9 +58,9 @@ public class SignUpEmailService {
 
             String code = getRandomCode();
             SendMailForm sendMailForm = SendMailForm.builder()
-                    .from("tester@mytest.com")
+                    .from("admin@dewcms.com")
                     .to(form.getEmail())
-                    .subject("Verification Email!")
+                    .subject("이메일 인증을 해주세요!")
                     .text(getVerificationEmailBody(s.getEmail(), s.getName(), "seller", code))
                     .build();
             mailgunClient.sendMail(sendMailForm);
@@ -77,7 +77,7 @@ public class SignUpEmailService {
     // 템플릿 만들기
     private String getVerificationEmailBody(String email, String name, String type, String code) {
         StringBuilder builder = new StringBuilder();
-        return builder.append("Hello ").append(name).append("please Click Link for verification!!!\n\n")
+        return builder.append("안녕하세요 ").append(name).append("님 이메일 인증을 위해서 아래 링크를 클릭해주세요!!!\n\n")
                 .append("http://localhost:8081/signUp/" + type + "/verify/?email=")
                 .append(email)
                 .append("&code=")
