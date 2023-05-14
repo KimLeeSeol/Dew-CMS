@@ -10,10 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @ServletComponentScan
 @EnableFeignClients
-@SpringBootApplication
 @EnableJpaAuditing
 @EnableJpaRepositories
-@RequiredArgsConstructor
+@SpringBootApplication
 public class UserApiApplication {
 
     public static void main(String[] args) {
