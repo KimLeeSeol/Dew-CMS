@@ -20,7 +20,7 @@ Use : Spring, Jpa, Mysql, Redis, Docker, AWS
 
 ## 2. 주문 서버
 ### 셀러
-- [ ] 상품 등록, 수정
+- [x] 상품 등록, 수정
 - [ ] 상품 삭제
 
 ### 구매자
