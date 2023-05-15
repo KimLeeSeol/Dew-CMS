@@ -27,7 +27,36 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZ
   "price": 100000
 }
 
+### 상품 수정
+PUT http://localhost:8082/seller/product
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6InZKUlZIRU9oREN0QkNZRHFlQVNPemc9PSIsInJvbGVzIjoiU0VMTEVSIiwiaWF0IjoxNjg0MDcxNDcxLCJleHAiOjE2ODQxNTc4NzF9.uhy8LjiKMLTT992sHU41xxmQ5Av33RcoWWJclUjVUug
 
+{
+  "id": 1,
+  "description": "상품 설명",
+  "items": [
+    {
+      "id": 1,
+      "count": 1,
+      "name": "250",
+      "price": 100000
+    }
+  ],
+  "name": "아디다스 슈퍼스타 한정판"
+}
+
+### 상품 아이템 수정
+PUT http://localhost:8082/seller/product/item
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6InZKUlZIRU9oREN0QkNZRHFlQVNPemc9PSIsInJvbGVzIjoiU0VMTEVSIiwiaWF0IjoxNjg0MDcxNDcxLCJleHAiOjE2ODQxNTc4NzF9.uhy8LjiKMLTT992sHU41xxmQ5Av33RcoWWJclUjVUug
+
+{
+  "id": 2,
+  "count": 123,
+  "name": "235",
+  "price": 10000
+}
 
 ### 이메일 인증 ( 고객 )
 GET http://localhost:8082/signUp/customer/verify?email=kdew0308@gmail.com&code=gUlyzQIVON
