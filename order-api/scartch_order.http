@@ -53,10 +53,17 @@ X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZ
 
 {
   "id": 2,
-  "count": 123,
-  "name": "235",
-  "price": 10000
+  "count": 10,
+  "name": "240",
+  "price": 100000
 }
 
-### 이메일 인증 ( 고객 )
-GET http://localhost:8082/signUp/customer/verify?email=kdew0308@gmail.com&code=gUlyzQIVON
+### 상품 삭제
+DELETE http://localhost:8082/seller/product?id=1
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6InZKUlZIRU9oREN0QkNZRHFlQVNPemc9PSIsInJvbGVzIjoiU0VMTEVSIiwiaWF0IjoxNjg0MDcxNDcxLCJleHAiOjE2ODQxNTc4NzF9.uhy8LjiKMLTT992sHU41xxmQ5Av33RcoWWJclUjVUug
+
+### 상품 아이템 삭제
+DELETE http://localhost:8082/seller/product/item?id=2
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6InZKUlZIRU9oREN0QkNZRHFlQVNPemc9PSIsInJvbGVzIjoiU0VMTEVSIiwiaWF0IjoxNjg0MDcxNDcxLCJleHAiOjE2ODQxNTc4NzF9.uhy8LjiKMLTT992sHU41xxmQ5Av33RcoWWJclUjVUug

@@ -41,4 +41,10 @@ public class ProductService {
 
         return product;
     }
+
+    public void deleteProduct(Long sellerId, Long productId) {
+        Product product = productRepository.findBySellerIdAndId(sellerId,productId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
+        productRepository.delete(product); //cascade  설정을 했기때문에 삭제하면 item도 같이 삭제됨
+    }
 }
