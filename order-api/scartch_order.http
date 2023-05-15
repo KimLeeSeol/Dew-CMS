@@ -75,3 +75,23 @@ Content-Type: application/json
 ### 상품 디테일 검색
 GET http://localhost:8081/search/product/detail?productId=1
 Content-Type: application/json
+
+### 카트 추가
+POST http://localhost:8082/customer/cart
+Content-Type: application/json
+X-AUTH-TOKEN: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJORGNTN0xtQXM1QTV6SWFPSGJxVHlSbXpFZEZwTGEzS1dnL2N3TEt4anZZPSIsImp0aSI6IjdzWkJzM1YzVWxCd0dEZ3doOGZrMlE9PSIsInJvbGVzIjoiU0VMTEVSIiwiaWF0IjoxNjg0MTU5MDE5LCJleHAiOjE2ODQyNDU0MTl9.YiwmCJixCu95BJ5pDLX1iIjC6SFonLxWOZv5RZpRXQU
+
+{
+  "description": "상품 설명",
+  "id": 1,
+  "items": [
+    {
+      "count": 1,
+      "id": 1,
+      "name": "270",
+      "price": 100000
+    }
+  ],
+  "name": "아디다스 슈퍼스타",
+  "sellerId": 1
+}
