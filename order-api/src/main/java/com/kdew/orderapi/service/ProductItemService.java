@@ -5,11 +5,13 @@ import com.kdew.orderapi.exception.ErrorCode;
 import com.kdew.orderapi.model.Product;
 import com.kdew.orderapi.model.ProductItem;
 import com.kdew.orderapi.product.AddProductItemForm;
+import com.kdew.orderapi.product.UpdateProductItemForm;
 import com.kdew.orderapi.repository.ProductItemRepository;
 import com.kdew.orderapi.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -31,5 +33,17 @@ public class ProductItemService {
         ProductItem productItem = ProductItem.of(sellerId, form);
         product.getProductItems().add(productItem);
         return product;
+    }
+
+    @Transactional
+    public ProductItem updateProductItem(Long sellerId, UpdateProductItemForm form) {
+        ProductItem productItem = productItemRepository.findById(form.getId())
+                .filter(pi -> pi.getSellerId().equals(sellerId))
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_ITEM));
+
+        productItem.setName(form.getName());
+        productItem.setCount(form.getCount());
+        productItem.setPrice(form.getPrice());
+        return productItem;
     }
 }
