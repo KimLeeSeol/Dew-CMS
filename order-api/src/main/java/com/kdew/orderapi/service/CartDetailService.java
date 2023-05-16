@@ -38,6 +38,14 @@ public class CartDetailService {
         return cartService.addCart(customerId,form);
     }
 
+    public Cart updateCart(Long customerId, Cart cart) {
+        // 실질적으로 변하는 데이터
+        // 상품의 삭제, 수량 변경
+
+        cartService.putCart(customerId,cart);
+        return getCart(customerId);
+    }
+
     // response는 메세지가 나가고 redis에는 없는걸로 저장이 되어야 함
     // 메세지를 본 다음에는, 이미 본 메세지는 스팸이 되기 때문에 제거함
     public Cart getCart(Long customerId) {
