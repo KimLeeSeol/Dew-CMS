@@ -19,6 +19,14 @@ public class ProductItemService {
 
     private final ProductRepository productRepository;
     private final ProductItemRepository productItemRepository;
+// 이미 아이템의 아이디를 갖고있기때문에 product할필요는 없음
+
+    @Transactional
+    public ProductItem getProductItem (Long id) {
+        return productItemRepository.getById(id);
+    }
+
+
 
     @Transactional
     public Product addProductItem(Long sellerId, AddProductItemForm form) {
