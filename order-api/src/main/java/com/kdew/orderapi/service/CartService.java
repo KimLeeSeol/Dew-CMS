@@ -22,7 +22,14 @@ public class CartService {
 
     // 상품이 부족한데 추가하면 안되니까
     public Cart getCart(Long customerId) {
-        return redisClient.get(customerId, Cart.class);
+        Cart cart = redisClient.get(customerId, Cart.class);
+        // 장바구니가 비어있으면!
+        return cart!=null?cart:new Cart();
+    }
+
+    public Cart putCart(Long cusotmerId, Cart cart) {
+        redisClient.put(cusotmerId, cart);
+        return cart;
     }
 
     public Cart addCart(Long customerId, AddProductCartForm form) {
