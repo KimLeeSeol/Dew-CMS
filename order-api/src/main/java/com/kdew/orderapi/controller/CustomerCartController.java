@@ -5,6 +5,7 @@ import com.kdew.orderapi.product.AddProductCartForm;
 import com.kdew.orderapi.redis.Cart;
 import com.kdew.orderapi.service.CartDetailService;
 import com.kdew.orderapi.service.CartService;
+import com.kdew.orderapi.service.OrderDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class CustomerCartController {
 
     private final CartDetailService cartDetailService;
     private final JwtAuthenticationProvider provider;
+    private final OrderDetailService orderDetailService;
 
     @PostMapping
     public ResponseEntity<Cart> addCart(
@@ -35,5 +37,14 @@ public class CustomerCartController {
             @RequestHeader(name = "X-AUTH-TOKEN") String token,
             @RequestBody Cart cart) {
         return ResponseEntity.ok(cartDetailService.updateCart(provider.getUserVo(token).getId(), cart));
+    }
+
+    @PostMapping("/order")
+    public ResponseEntity<Cart> order(
+            @RequestHeader(name = "X-AUTH-TOKEN") String token,
+            @RequestBody Cart cart) {
+
+        orderDetailService.order(token, cart);
+        return ResponseEntity.ok().build();
     }
 }

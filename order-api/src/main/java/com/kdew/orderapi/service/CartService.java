@@ -24,15 +24,16 @@ public class CartService {
     public Cart getCart(Long customerId) {
         Cart cart = redisClient.get(customerId, Cart.class);
         // 장바구니가 비어있으면!
-        return cart!=null?cart:new Cart();
+        return  cart != null? cart : new Cart();
     }
 
-    public Cart putCart(Long cusotmerId, Cart cart) {
-        redisClient.put(cusotmerId, cart);
+    public Cart putCart(Long customerId, Cart cart) {
+        redisClient.put(customerId, cart);
         return cart;
     }
 
     public Cart addCart(Long customerId, AddProductCartForm form) {
+
         Cart cart = redisClient.get(customerId, Cart.class);
         if (cart == null) {
             // 장바구니가 없으면 새로운 카트를 만들어줄 것임
@@ -47,16 +48,19 @@ public class CartService {
 
         if (productOptional.isPresent()) {
             Cart.Product redisProduct = productOptional.get();
-            List<Cart.ProductItem> items = form.getItems().stream().map(Cart.ProductItem::from).collect(Collectors.toList()); // 카트 안에 있는 아이템들 먼저 확인
+            // requested
+            List<Cart.ProductItem> items = form.getItems().stream()
+                    .map(Cart.ProductItem::from).collect(Collectors.toList()); // 카트 안에 있는 아이템들 먼저 확인
 
             // redis에서 가져와야할 아이템
             Map<Long, Cart.ProductItem> redisItemMap = redisProduct.getItems().stream()
-                    .collect(Collectors.toMap(Cart.ProductItem::getId, it->it)); // 검색속도 빠르게 하기 위해서 Map으로
+                    .collect(Collectors.toMap(it -> it.getId(), it -> it)); // 검색속도 빠르게 하기 위해서 Map으로
 
             if (!redisProduct.getName().equals(form.getName())) {
-                cart.addMessage(redisProduct.getName()+"의 정보가 변경되었습니다. 확인 부탁드립니다.");
+                cart.addMessage(redisProduct.getName() + "의 정보가 변경되었습니다. 확인 부탁드립니다.");
             }
-            for (Cart.ProductItem item : items) {
+
+            for(Cart.ProductItem item : items) {
                 Cart.ProductItem redisItem = redisItemMap.get(item.getId());
 
                 if (redisItem == null) {

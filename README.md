@@ -29,5 +29,4 @@ Use : Spring, Jpa, Mysql, Redis, Docker, AWS
 - [x] 장바구니에 물건 추가
 - [x] 장바구니 확인
 - [x] 장바구니 변경
-- [ ] 주문하기
-- [ ] 주문내역 이메일로 발송
+- [x] 주문하기

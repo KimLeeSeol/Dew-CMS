@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,24 +26,24 @@ public class CartDetailService {
 
         // 상품이 있는지 확인
         Product product = productSearchService.getByProductId(form.getId());
-        if(product==null) {
+
+        if (product == null) {
             throw new CustomException(ErrorCode.NOT_FOUND_PRODUCT);
         }
-
         Cart cart = cartService.getCart(customerId); // customerId의 카트를 가져오고
 
-        if (cart != null && !addAble(cart, product, form)) {
+        if (!addAble(cart, product, form)) {
             throw new CustomException(ErrorCode.ITEM_COUNT_NOT_ENOUGHE);
         }
 
-        return cartService.addCart(customerId,form);
+        return cartService.addCart(customerId, form);
     }
 
     public Cart updateCart(Long customerId, Cart cart) {
         // 실질적으로 변하는 데이터
         // 상품의 삭제, 수량 변경
 
-        cartService.putCart(customerId,cart);
+        cartService.putCart(customerId, cart);
         return getCart(customerId);
     }
 
@@ -50,6 +51,7 @@ public class CartDetailService {
     // 메세지를 본 다음에는, 이미 본 메세지는 스팸이 되기 때문에 제거함
     public Cart getCart(Long customerId) {
         Cart cart = refreshCart(cartService.getCart(customerId));
+        cartService.putCart(cart.getCustomerId(), cart);
         Cart returnCart = new Cart();
         returnCart.setCustomerId(customerId);
         returnCart.setProducts(cart.getProducts());
@@ -65,7 +67,8 @@ public class CartDetailService {
         cartService.putCart(customerId, null);
     }
 
-    public Cart refreshCart(Cart cart) {
+    // 저장을 해주는 기능은 없음(원본이 훼손될 수 있으니까)
+    protected Cart refreshCart(Cart cart) {
         // 1. 상품이나 상품의 아이템 정보, 가격, 수량이 변동되었는지 체크
         // 변동 되었으면 알람
         // 2. 상품의 수량, 가격을 우리가 임의로 변경
@@ -91,6 +94,7 @@ public class CartDetailService {
                 continue;
             }
 
+
             Map<Long, ProductItem> productItemMap = p.getProductItems().stream()
                     .collect(Collectors.toMap(ProductItem::getId, productItem -> productItem));
 
@@ -109,21 +113,22 @@ public class CartDetailService {
                     continue;
                 }
 
-                boolean isPriceChanges = false, isCountNotEnough = false; // 아이템의 가격도 바뀌고, 수량도 부족하면 메시지를 두줄로 표현해야하는데, 이렇게 변수를 쓰면
+
+                boolean isPriceChanged = false, isCountNotEnough = false; // 아이템의 가격도 바뀌고, 수량도 부족하면 메시지를 두줄로 표현해야하는데, 이렇게 변수를 쓰면
 
 
                 if (!cartProductItem.getPrice().equals(pi.getPrice())) {
-                    isPriceChanges = true;
+                    isPriceChanged = true;
                     cartProductItem.setPrice(pi.getPrice()); // 변동이 되었으면 카트의 정보를 변경을 해줘야 함
                 }
                 if (cartProductItem.getCount() > pi.getCount()) {
                     isCountNotEnough = true;
                     cartProductItem.setCount(pi.getCount());
                 }
-                if(isPriceChanges && isCountNotEnough) {
+                if(isPriceChanged && isCountNotEnough) {
                     // message 1
                     tmpMessages.add(cartProductItem.getName() + " 가격변동과 수량이 부족하여 구매 가능한 최대치로 변경되었습니다.");
-                } else if (isPriceChanges) {
+                } else if (isPriceChanged) {
                     // message 2
                     tmpMessages.add(cartProductItem.getName() + " 가격이 변동되었습니다.");
                 } else if (isCountNotEnough) {
@@ -149,7 +154,6 @@ public class CartDetailService {
                 cart.addMessage(builder.toString());
             }
         }
-        cartService.putCart(cart.getCustomerId(), cart);
         return cart;
     }
 
@@ -157,7 +161,8 @@ public class CartDetailService {
     private boolean addAble (Cart cart, Product product, AddProductCartForm form) {
         Cart.Product cartProduct = cart.getProducts().stream()
                 .filter(p -> p.getId().equals(form.getId()))
-                .findFirst().orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_PRODUCT));
+                .findFirst().orElse(Cart.Product.builder().id(product.getId())
+                        .items(Collections.emptyList()).build());
 
         Map<Long, Integer> cartItemCountMap = cartProduct.getItems().stream()
                 .collect(Collectors.toMap(Cart
@@ -169,6 +174,9 @@ public class CartDetailService {
         return form.getItems().stream().noneMatch(
                 formItem -> {
                     Integer cartCount = cartItemCountMap.get(formItem.getId());
+                    if (cartCount == null) {
+                        cartCount = 0;
+                    }
                     Integer currentCount = currentItemCountMap.get(formItem.getId());
                     return formItem.getCount() + cartCount > currentCount;
                 });
